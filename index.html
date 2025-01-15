@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Àudio i Vídeo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #25a3a3;
+        }
+
+        h3 {
+            margin: 20px 0;
+        }
+
+        video {
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #25a3a3;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #25a3a3;
+        }
+
+        .icono-svg {
+            width: 33px;
+            height: 33px;
+            margin-right: 2px;
+        }
+
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #25a3a3;
+            color: white;
+            margin-top: 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .footer a {
+            color: #b0e4e4;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo subtítulos */
+        ::cue {
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 300;
+            color: rgb(218, 208, 208);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Underground: Night Tube</h1>
+
+    <!-- Video -->
+    <video id="videoMetro" controls poster="metroLondon.jpg" height="400">
+
+        <source src="media/metro.mp4" type="video/mp4">
+        <source src="media/metro.ogg" type="video/ogg">
+
+        <track src="media/captions/metro-cat.vtt" label="Català" kind="captions" srclang="es-cat" default>
+        <track src="media/captions/metro-es.vtt" label="Espanyol" kind="captions" srclang="es">
+
+        El teu navegador no suporta l'element HTML vídeo.
+    </video>
+
+    <h3>Captura el teu moment preferit</h3>
+
+    <!-- Botón para capturar la imagen -->
+    <button id="botonCaptura">
+        <svg class="icono-svg" viewBox="0 0 47.330158 43.906536" version="1.1" id="svg1"
+            xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(-46.933282,-114.12329)">
+                <rect style="fill:#000000;" width="47.069992" height="32.463432" x="47.063366" y="119.55517"
+                    rx="2.3202178" />
+                <rect style="fill:#ffffff;" width="17.872519" height="10.314672" x="71.785042" y="115.23536"
+                    rx="1.900535" />
+                <ellipse style="fill:#ffffff;" cx="68.779572" cy="141.6329" rx="16.109556" ry="15.057591" />
+            </g>
+        </svg>
+    </button>
+
+    <canvas id="canvasCaptura" width="640" height="360"></canvas>
+
+
+    <!-- Derechos de autor -->
+    <div class="footer">
+        "<a href="https://timtaj.com/royalty-free-music/background-technology" target="_blank">Background
+            Technology</a>" by
+        <a href="https://freemusicarchive.org/music/timtaj/contact" target="_blank">Taj Tim</a> is licensed under
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+            target="_blank">Attribution-NonCommercial-NoDerivatives 4.0
+            International License</a>.
+    </div>
+
+    <script>
+        // Obtener video, canvas y botón
+        const video = document.getElementById('videoMetro');
+        const canvas = document.getElementById('canvasCaptura');
+        const context = canvas.getContext('2d');
+        const capturaBtn = document.getElementById('botonCaptura');
+
+
+        // Función para capturar una imagen del video y mostrarla en el canvas
+        function capturarImagen() {
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        }
+
+        // Escuchar el evento click en el botón
+        capturaBtn.addEventListener('click', capturarImagen);
+
+    </script>
+</body>
+
+</html>
